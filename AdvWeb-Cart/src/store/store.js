@@ -1,15 +1,14 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import firebase from 'firebase'
-import router from '../router/index'
 
 let config = {
-  apiKey: 'AIzaSyDLfM_hgjwzB9VAuso7gIkYnPq4OuCfAJE',
-  authDomain: 'drawsomething-21394.firebaseapp.com',
-  databaseURL: 'https://drawsomething-21394.firebaseio.com',
-  projectId: 'drawsomething-21394',
-  storageBucket: 'drawsomething-21394.appspot.com',
-  messagingSenderId: '948399402337'
+  apiKey: 'AIzaSyDZiGEHS_dMBgz43QBCCdoKN5KX-Rulc6U',
+  authDomain: 'vue-project-4a8f5.firebaseapp.com',
+  databaseURL: 'https://vue-project-4a8f5.firebaseio.com',
+  projectId: 'vue-project-4a8f5',
+  storageBucket: 'vue-project-4a8f5.appspot.com',
+  messagingSenderId: '232717547987'
 }
 var firebaseApp = firebase.initializeApp(config)
 let provider = new firebase.auth.FacebookAuthProvider()
@@ -21,34 +20,20 @@ var db = firebaseApp.database()
 Vue.use(Vuex)
 export const store = new Vuex.Store({
   state: {
-    user: {}
+    product: {}
   },
   getters: {
-    user: state => state.user
+    product: state => state.product
   },
   mutations: {
-    setReady (state) {
-      state.isReady = true
+    setProduct (state, product) {
+      state.product = product
     }
   },
   actions: {
-    init ({ commit, dispatch, bindFirebaseRef }) {
-      firebase.auth().onAuthStateChanged((user) => {
-        if (user && user.uid) {
-          let profile = {
-            name: user.displayName,
-            picture: user.photoURL,
-            fb: user.providerData[0]
-          }
-          commit('setKeyplayer', user.uid)
-          commit('setUser', profile)
-          router.push('/lobby')
-        } else {
-          commit('setUser', null)
-          router.push('/login')
-          commit('setReady')
-        }
-      })
+    inputProduct (context, product) {
+      console.log(product)
+      db.ref('products').push(product)
     }
   }
 })

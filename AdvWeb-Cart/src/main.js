@@ -5,6 +5,7 @@ import App from './App'
 import router from './router'
 import Vuex from 'vuex'
 import BootstrapVue from 'bootstrap-vue'
+import { store } from './store/store'
 
 Vue.use(Vuex)
 Vue.use(BootstrapVue)
@@ -12,6 +13,7 @@ Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 new Vue({
+  store,
   el: '#app',
   router,
   components: { App },
