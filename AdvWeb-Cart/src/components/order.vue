@@ -11,11 +11,6 @@ export default {
       product: [],
       chooseItems: []
     }
-  },
-  created () {
-    for (i=0; i < 10; I++) {
-      this.product[i] = 'items1'
-    }
   }
 }
 </script>
