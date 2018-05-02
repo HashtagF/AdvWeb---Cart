@@ -1,7 +1,9 @@
 <template>
 <div>
-111
-  </div>
+  <h1 v-for="(pro, index) in product" :key="index">
+    {{pro}}
+  </h1>
+</div>
 </template>
 
 <script>
@@ -10,6 +12,11 @@ export default {
     return {
       product: [],
       chooseItems: []
+    }
+  },
+  created () {
+    for (var i = 0; i < 10; i++) {
+      this.product[i] = '123'
     }
   }
 }
