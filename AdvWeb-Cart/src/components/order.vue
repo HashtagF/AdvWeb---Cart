@@ -1,8 +1,16 @@
 <template>
 <div>
   <h1 v-for="(pro, index) in product" :key="index">
-    {{pro}}
+    <div @click="chooseProduct(index)">
+      {{pro}}
+      </div>
   </h1>
+  <div>
+    <h2>รายการสั่งซื้อ</h2>
+  <div v-for="(chooseItem, index) in chooseItems" :key="index">
+    {{chooseItem}}
+  </div>
+    </div>
 </div>
 </template>
 
@@ -17,6 +25,11 @@ export default {
   created () {
     for (var i = 0; i < 10; i++) {
       this.product[i] = '123'
+    }
+  },
+  methods: {
+    chooseProduct (index) {
+      this.chooseItems.push(index)
     }
   }
 }
