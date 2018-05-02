@@ -1,8 +1,8 @@
 <template>
 <div>
-  <h1 v-for="(pro, index) in product" :key="index">
+  <h1 v-for="(pro, index) in productall" :key="index">
     <div @click="chooseProduct(index)">
-      {{pro}}
+      {{pro.name}}
       </div>
   </h1>
   <div>
@@ -15,19 +15,26 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 export default {
   data () {
     return {
       product: [],
-      chooseItems: []
+      chooseItems: {}
     }
   },
   created () {
-    for (var i = 0; i < 10; i++) {
-      this.product[i] = '123'
-    }
+    this.showProduct()
+  },
+  computed: {
+    ...mapGetters([
+      'productall'
+    ])
   },
   methods: {
+    ...mapActions([
+      'showProduct'
+    ]),
     chooseProduct (index) {
       this.chooseItems.push(index)
     }

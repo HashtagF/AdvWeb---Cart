@@ -20,20 +20,31 @@ var db = firebaseApp.database()
 Vue.use(Vuex)
 export const store = new Vuex.Store({
   state: {
-    product: {}
+    product: {},
+    productall: []
   },
   getters: {
-    product: state => state.product
+    product: state => state.product,
+    productall: state => state.productall
   },
   mutations: {
     setProduct (state, product) {
       state.product = product
+    },
+    setProductall (state, product) {
+      state.productall = product
     }
   },
   actions: {
     inputProduct (context, product) {
       console.log(product)
       db.ref('products').push(product)
+    },
+    showProduct (context) {
+      var ref = db.ref('products')
+      ref.on('value', (snapshot) => {
+        context.commit('setProductall', snapshot.val())
+      })
     }
   }
 })
