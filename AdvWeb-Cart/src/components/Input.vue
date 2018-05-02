@@ -8,14 +8,16 @@
     <form class="">
       <div class="row pb-4">
         <div class="col-6 text-right">
-            <p> Name Product : </p>
-            <p> Price : </p>
-            <p> Count : </p>
+            <p class="pb-2"> Name Product : </p>
+            <p class="pb-2"> Price : </p>
+            <p class="pb-2"> Count : </p>
+            <p> Image : </p>
         </div>
         <div class="col-6 text-left">
           <p><input type="text" value="" v-model="nameProduct"></p>
           <p><input type="number" value="" v-model="price"> บาท</p>
           <p><input type="number" value="" v-model="count"> หน่วย</p>
+          <p><input type="text" value="" v-model="img"></p>
         </div>
       </div>
       <div class="row">
@@ -35,7 +37,8 @@ export default {
     return {
       nameProduct: '',
       price: '',
-      count: ''
+      count: '',
+      img: ''
     }
   }
 }
