@@ -14,33 +14,46 @@
             <p> Image : </p>
         </div>
         <div class="col-6 text-left">
-          <p><input type="text" value="" v-model="nameProduct"></p>
-          <p><input type="number" value="" v-model="price"> บาท</p>
-          <p><input type="number" value="" v-model="count"> หน่วย</p>
-          <p><input type="text" value="" v-model="img"></p>
+          <p><input type="text" value="" v-model="product.name"></p>
+          <p><input type="number" value="" v-model="product.price"> บาท</p>
+          <p><input type="number" value="" v-model="product.count"> หน่วย</p>
+          <p><input type="text" value="" v-model="product.img"></p>
         </div>
       </div>
       <div class="row">
         <div class="col-12">
-          <button class="btn btn-info">Get Products</button>
+          <button class="btn btn-info" @click="inputProduct(product)">Get Products</button>
           <button type="reset" class="btn btn-danger">Cancle</button>
         </div>
       </div>
     </form>
+    {{product}}
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
   name: 'Input',
   data () {
     return {
-      nameProduct: '',
-      price: '',
-      count: '',
-      img: ''
+      product: {
+        name: '',
+        price: '',
+        count: '',
+        img: ''
+      }
     }
+  },
+  computed: {
+
+  },
+  methods: {
+    ...mapActions([
+      'inputProduct'
+    ])
   }
+
 }
 </script>
 
