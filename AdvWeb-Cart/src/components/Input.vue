@@ -1,6 +1,11 @@
 <template>
   <div class="container">
     <div class="row pb-5">
+      <div class="col text-right">
+        <router-link to='order'><button class="btn btn-info " >หน้าสินค้า</button></router-link>
+      </div>
+    </div>
+    <div class="row pb-5">
       <div class="col">
         <h3 class="border">Get Products</h3>
       </div>
@@ -22,12 +27,11 @@
       </div>
       <div class="row">
         <div class="col-12">
-          <button class="btn btn-info" @click="inputProduct(product)">Get Products</button>
+          <button class="btn btn-info" @click="addProduct()">Get Products</button>
           <button type="reset" class="btn btn-danger">Cancle</button>
         </div>
       </div>
     </form>
-    {{product}}
   </div>
 </template>
 
@@ -51,7 +55,14 @@ export default {
   methods: {
     ...mapActions([
       'inputProduct'
-    ])
+    ]),
+    addProduct () {
+      this.inputProduct(this.product)
+      this.product.name = ''
+      this.product.price = ''
+      this.product.count = ''
+      this.product.img = ''
+    }
   }
 
 }

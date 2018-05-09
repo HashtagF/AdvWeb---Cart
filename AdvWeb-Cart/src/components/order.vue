@@ -1,19 +1,28 @@
 <template>
 <div class="container">
-   <div>
-    <h2>รายการสั่งซื้อ</h2>
-  <div v-for="(chooseItem, index) in chooseItems" :key="index">
-    {{chooseItem}}
-  </div>
-  <div>
-    <button v-if="chooseItems != ''" @click="payment()" class="btn btn-success">ชำระเงิน</button>
-  </div>
+  <div class="row pb-5">
+    <div class="col">
+      <h1>Home รายการสินค้า</h1>
     </div>
-  <h1 v-for="(pro, index) in productall" :key="index">
-    <div @click="chooseProduct(pro)">
-      {{pro.name}}
+  </div>
+  <div class="row" >
+    <div class="col-3" v-for="(product, index) in productall" :key="index">
+      <div class="card px-1">
+        <img class="card-img-top" :src="product.img" height="250px">
+        <div class="card-body">
+          <h5 class="card-title">{{product.name}}</h5>
+          <h6 class="card-text">ราคา : {{product.price}} บาท</h6>
+          <p class="card-text">จำนวนคงเหลือ : {{product.count}} EA</p>
+          <button v-if="product.count > 0" class="btn btn-success"  @click="updateStock(index)">สั่งซื้อ</button>
+          <button v-else class="btn btn-danger" disabled>สินค้าหมด</button>
+        </div>
       </div>
-  </h1>
+    </div>
+  </div>
+  <div class="row">
+    
+  </div>
+  {{carts}}
 </div>
 </template>
 
@@ -29,32 +38,20 @@ export default {
   },
   created () {
     this.showProduct()
+    this.showCarts()
   },
   computed: {
     ...mapGetters([
-      'productall'
+      'productall',
+      'carts'
     ])
   },
   methods: {
     ...mapActions([
       'showProduct',
-      'updateStock'
-    ]),
-    chooseProduct (index) {
-      if (this.chooseItems.indexOf(index) === -1) {
-        this.chooseItems.push(index)
-        this.countItems[index.name] = 1
-      } else {
-        if (this.countItems[index.name] < index.count) {
-          this.countItems[index.name] = this.countItems[index.name] + 1
-        }
-      }
-    },
-    payment () {
-      this.updateStock(this.countItems)
-      this.chooseItems = []
-      this.countItems = []
-    }
+      'updateStock',
+      'showCarts'
+    ])
   }
 }
 </script>
