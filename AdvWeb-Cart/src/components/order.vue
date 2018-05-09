@@ -1,16 +1,19 @@
 <template>
 <div>
-  <h1 v-for="(pro, index) in productall" :key="index">
-    <div @click="chooseProduct(index)">
-      {{pro.name}}
-      </div>
-  </h1>
-  <div>
+   <div>
     <h2>รายการสั่งซื้อ</h2>
   <div v-for="(chooseItem, index) in chooseItems" :key="index">
     {{chooseItem}}
   </div>
+  <div>
+    <button @click="payment()">ชำระเงิน</button>
+  </div>
     </div>
+  <h1 v-for="(pro, index) in productall" :key="index">
+    <div @click="chooseProduct(pro)">
+      {{pro.name}}
+      </div>
+  </h1>
 </div>
 </template>
 
@@ -20,7 +23,8 @@ export default {
   data () {
     return {
       product: [],
-      chooseItems: {}
+      chooseItems: [],
+      countItems: []
     }
   },
   created () {
@@ -33,10 +37,23 @@ export default {
   },
   methods: {
     ...mapActions([
-      'showProduct'
+      'showProduct',
+      'updateStock'
     ]),
     chooseProduct (index) {
-      this.chooseItems.push(index)
+      if (this.chooseItems.indexOf(index) === -1) {
+        this.chooseItems.push(index)
+        this.countItems[index.name] = 1
+      } else {
+        if (this.countItems[index.name] < index.count) {
+          this.countItems[index.name] = this.countItems[index.name] + 1
+        }
+      }
+    },
+    payment () {
+      this.updateStock(this.countItems)
+      this.chooseItems = []
+      this.countItems = []
     }
   }
 }

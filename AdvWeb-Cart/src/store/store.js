@@ -45,6 +45,9 @@ export const store = new Vuex.Store({
       ref.on('value', (snapshot) => {
         context.commit('setProductall', snapshot.val())
       })
+    },
+    updateStock (context, productCount) {
+      console.log(productCount)
     }
   }
 })
