@@ -62,12 +62,13 @@ export const store = new Vuex.Store({
         db.ref('products').child([key] + '/count').set(context.state.productall[key].count - 1)
         if (context.state.carts[key] == null) {
           db.ref('carts').child([key] + '/count').set(1)
-          console.log('iffff')
+          db.ref('carts').child([key] + '/price').set(context.state.productall[key].price)
+          db.ref('carts').child('/total').set(1)
         } else {
-          console.log('else')
           db.ref('carts').child([key] + '/count').set(context.state.carts[key].count + 1)
+          db.ref('carts').child([key] + '/price').set(context.state.carts[key].price + context.state.productall[key].price)
+          db.ref('carts').child('/total').set(context.state.carts.total + 1)
         }
-
       }
     }
   }

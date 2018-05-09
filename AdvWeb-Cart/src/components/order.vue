@@ -19,9 +19,6 @@
       </div>
     </div>
   </div>
-  <div class="row">
-    
-  </div>
   {{carts}}
 </div>
 </template>
