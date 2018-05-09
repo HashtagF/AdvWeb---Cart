@@ -1,12 +1,12 @@
 <template>
-<div>
+<div class="container">
    <div>
     <h2>รายการสั่งซื้อ</h2>
   <div v-for="(chooseItem, index) in chooseItems" :key="index">
     {{chooseItem}}
   </div>
   <div>
-    <button @click="payment()">ชำระเงิน</button>
+    <button v-if="chooseItems != ''" @click="payment()" class="btn btn-success">ชำระเงิน</button>
   </div>
     </div>
   <h1 v-for="(pro, index) in productall" :key="index">
