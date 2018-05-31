@@ -2,7 +2,7 @@
 <div class="container">
   <div class="row pb-5">
     <div class="col">
-      <h1>Home รายการสินค้า</h1>
+      <h1>HashtagF_Store</h1>
     </div>
   </div>
   <div class="row" >
